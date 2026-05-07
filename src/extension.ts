@@ -34,6 +34,14 @@ export function activate(context: vscode.ExtensionContext): void {
       },
     ),
 
+    vscode.commands.registerCommand(
+      'claudeCodeManager.restartCommand',
+      (item?: CommandItem) => {
+        if (!item) return;
+        runner.restartCommand(item.workspace, item.commandConfig);
+      },
+    ),
+
     vscode.commands.registerCommand('claudeCodeManager.refresh', () => provider.refresh()),
 
     vscode.commands.registerCommand('claudeCodeManager.openSettings', () => openSettings()),

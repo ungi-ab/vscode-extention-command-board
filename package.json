@@ -79,6 +79,12 @@
         "icon": "$(debug-stop)"
       },
       {
+        "command": "claudeCodeManager.restartCommand",
+        "title": "Restart command",
+        "category": "Claude Code Manager",
+        "icon": "$(debug-restart)"
+      },
+      {
         "command": "claudeCodeManager.refresh",
         "title": "Refresh",
         "category": "Claude Code Manager",
@@ -117,9 +123,14 @@
           "group": "inline@1"
         },
         {
-          "command": "claudeCodeManager.stopCommand",
+          "command": "claudeCodeManager.restartCommand",
           "when": "view == claudeCodeManager.view && viewItem == command-running",
           "group": "inline@1"
+        },
+        {
+          "command": "claudeCodeManager.stopCommand",
+          "when": "view == claudeCodeManager.view && viewItem == command-running",
+          "group": "inline@2"
         },
         {
           "command": "claudeCodeManager.openWorkspaceFolder",
@@ -134,6 +145,10 @@
         },
         {
           "command": "claudeCodeManager.stopCommand",
+          "when": "false"
+        },
+        {
+          "command": "claudeCodeManager.restartCommand",
           "when": "false"
         },
         {

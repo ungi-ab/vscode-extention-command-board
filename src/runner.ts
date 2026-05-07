@@ -29,6 +29,7 @@ export class Runner implements vscode.Disposable {
   async runCommand(
     workspace: ResolvedWorkspaceConfig,
     command: CommandConfig,
+    options: { forceNew?: boolean } = {},
   ): Promise<void> {
     if (!fs.existsSync(workspace.resolvedPath)) {
       vscode.window.showErrorMessage(
@@ -40,7 +41,7 @@ export class Runner implements vscode.Disposable {
     const key = makeKey(workspace, command);
     const existing = this.terminals.get(key);
 
-    if (existing && getReuseTerminal()) {
+    if (existing && !options.forceNew && getReuseTerminal()) {
       existing.show(false);
       return;
     }
@@ -70,6 +71,16 @@ export class Runner implements vscode.Disposable {
     terminal.dispose();
     this.terminals.delete(key);
     this._onStateChanged.fire();
+  }
+
+  restartCommand(workspace: ResolvedWorkspaceConfig, command: CommandConfig): void {
+    const key = makeKey(workspace, command);
+    const existing = this.terminals.get(key);
+    if (existing) {
+      existing.dispose();
+      this.terminals.delete(key);
+    }
+    void this.runCommand(workspace, command, { forceNew: true });
   }
 
   dispose(): void {
