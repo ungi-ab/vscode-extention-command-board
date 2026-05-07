@@ -1,0 +1,1 @@
+# vscode-claude-code-manager
