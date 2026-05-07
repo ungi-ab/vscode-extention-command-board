@@ -28,7 +28,7 @@ export class CommandItem extends vscode.TreeItem {
     this.iconPath = new vscode.ThemeIcon(running ? 'sync~spin' : 'play');
     this.contextValue = running ? 'command-running' : 'command-idle';
     this.command = {
-      command: 'claudeCodeManager.runCommand',
+      command: 'commandBoard.runCommand',
       title: 'Run',
       arguments: [this],
     };

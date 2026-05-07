@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import { ResolvedWorkspaceConfig, WorkspaceConfig } from './types';
 
-const SECTION = 'claudeCodeManager';
+const SECTION = 'commandBoard';
 
 export function loadWorkspaces(): ResolvedWorkspaceConfig[] {
   const raw = vscode.workspace

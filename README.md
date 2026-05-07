@@ -1,4 +1,4 @@
-# Claude Code Manager
+# Command Board
 
 複数の Git worktree / リポジトリで `pnpm dev` などのコマンドを、サイドバーのボタン1つで実行できる VSCode / Cursor 拡張機能です。
 ターミナルを開いて `cd` する手間なく、各ワークツリーで Claude Code や開発サーバーを並行起動できます。
@@ -21,15 +21,15 @@
 
 ### Cursor / VSCode に VSIX を入れる方法
 
-1. リリースから `claude-code-manager-x.y.z.vsix` を取得（または下記の手順で自分でビルド）
+1. リリースから `vscode-extention-command-board-x.y.z.vsix` を取得（または下記の手順で自分でビルド）
 2. インストール:
 
    ```bash
    # Cursor の場合
-   cursor --install-extension claude-code-manager-x.y.z.vsix
+   cursor --install-extension vscode-extention-command-board-x.y.z.vsix
 
    # VSCode の場合
-   code --install-extension claude-code-manager-x.y.z.vsix
+   code --install-extension vscode-extention-command-board-x.y.z.vsix
    ```
 
    または `Cmd + Shift + P` → `Extensions: Install from VSIX...` から選択。
@@ -38,7 +38,7 @@
 
 ```bash
 pnpm install
-pnpm run package    # claude-code-manager-x.y.z.vsix が生成される
+pnpm run package    # vscode-extention-command-board-x.y.z.vsix が生成される
 ```
 
 ### 開発時（F5デバッグ）
@@ -52,8 +52,8 @@ pnpm run compile
 
 ## 使い方
 
-1. アクティビティバーの **Claude Code Manager** アイコンをクリック
-2. ビュー右上の歯車アイコンから `settings.json` を開いて `claudeCodeManager.workspaces` を設定
+1. アクティビティバーの **Command Board** アイコンをクリック
+2. ビュー右上の歯車アイコンから `settings.json` を開いて `commandBoard.workspaces` を設定
 3. ツリーに表示されたコマンドの ▶︎ をクリックすると、ワークツリー内で統合ターミナルが起動
 
 ## 設定例
@@ -62,7 +62,7 @@ pnpm run compile
 
 ```jsonc
 {
-  "claudeCodeManager.workspaces": [
+  "commandBoard.workspaces": [
     {
       "name": "frontend",
       "path": "/absolute/path/to/frontend",
@@ -83,7 +83,7 @@ pnpm run compile
       ]
     }
   ],
-  "claudeCodeManager.reuseTerminal": true
+  "commandBoard.reuseTerminal": true
 }
 ```
 
@@ -99,22 +99,22 @@ pnpm run compile
 
 | キー | 型 | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `claudeCodeManager.workspaces` | `array` | `[]` | ワークツリーと実行コマンドの一覧 |
-| `claudeCodeManager.reuseTerminal` | `boolean` | `true` | 同じコマンド再実行時に既存ターミナルへフォーカス |
+| `commandBoard.workspaces` | `array` | `[]` | ワークツリーと実行コマンドの一覧 |
+| `commandBoard.reuseTerminal` | `boolean` | `true` | 同じコマンド再実行時に既存ターミナルへフォーカス |
 
 ## 公開コマンド
 
 | Command ID | 用途 |
 | --- | --- |
-| `claudeCodeManager.runCommand` | コマンドを実行 |
-| `claudeCodeManager.stopCommand` | 実行中ターミナルを破棄 |
-| `claudeCodeManager.refresh` | TreeView を再描画 |
-| `claudeCodeManager.openSettings` | `settings.json` を開く |
-| `claudeCodeManager.openWorkspaceFolder` | OS のファイラで該当パスを開く |
+| `commandBoard.runCommand` | コマンドを実行 |
+| `commandBoard.stopCommand` | 実行中ターミナルを破棄 |
+| `commandBoard.refresh` | TreeView を再描画 |
+| `commandBoard.openSettings` | `settings.json` を開く |
+| `commandBoard.openWorkspaceFolder` | OS のファイラで該当パスを開く |
 
 ## アンインストール / 更新
 
-- アンインストール: 拡張機能ビューから「Claude Code Manager」を選んで `Uninstall`
+- アンインストール: 拡張機能ビューから「Command Board」を選んで `Uninstall`
 - 更新: `package.json` の `version` を上げて再パッケージ → `--install-extension` で上書きインストール
 
 ## ライセンス

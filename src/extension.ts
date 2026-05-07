@@ -8,7 +8,7 @@ export function activate(context: vscode.ExtensionContext): void {
   const runner = new Runner();
   const provider = new WorkspaceTreeProvider(runner);
 
-  const treeView = vscode.window.createTreeView('claudeCodeManager.view', {
+  const treeView = vscode.window.createTreeView('commandBoard.view', {
     treeDataProvider: provider,
     showCollapseAll: true,
   });
@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext): void {
     onConfigChanged(() => provider.refresh()),
 
     vscode.commands.registerCommand(
-      'claudeCodeManager.runCommand',
+      'commandBoard.runCommand',
       (item?: CommandItem) => {
         if (!item) return;
         return runner.runCommand(item.workspace, item.commandConfig);
@@ -27,7 +27,7 @@ export function activate(context: vscode.ExtensionContext): void {
     ),
 
     vscode.commands.registerCommand(
-      'claudeCodeManager.stopCommand',
+      'commandBoard.stopCommand',
       (item?: CommandItem) => {
         if (!item) return;
         runner.stopCommand(item.workspace, item.commandConfig);
@@ -35,19 +35,19 @@ export function activate(context: vscode.ExtensionContext): void {
     ),
 
     vscode.commands.registerCommand(
-      'claudeCodeManager.restartCommand',
+      'commandBoard.restartCommand',
       (item?: CommandItem) => {
         if (!item) return;
         runner.restartCommand(item.workspace, item.commandConfig);
       },
     ),
 
-    vscode.commands.registerCommand('claudeCodeManager.refresh', () => provider.refresh()),
+    vscode.commands.registerCommand('commandBoard.refresh', () => provider.refresh()),
 
-    vscode.commands.registerCommand('claudeCodeManager.openSettings', () => openSettings()),
+    vscode.commands.registerCommand('commandBoard.openSettings', () => openSettings()),
 
     vscode.commands.registerCommand(
-      'claudeCodeManager.openWorkspaceFolder',
+      'commandBoard.openWorkspaceFolder',
       (item?: WorkspaceItem) => {
         if (!item) return;
         return vscode.commands.executeCommand(

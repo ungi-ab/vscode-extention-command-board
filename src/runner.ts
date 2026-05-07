@@ -33,7 +33,7 @@ export class Runner implements vscode.Disposable {
   ): Promise<void> {
     if (!fs.existsSync(workspace.resolvedPath)) {
       vscode.window.showErrorMessage(
-        `[Claude Code Manager] パスが存在しません: ${workspace.resolvedPath}`,
+        `[Command Board] パスが存在しません: ${workspace.resolvedPath}`,
       );
       return;
     }

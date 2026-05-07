@@ -1,6 +1,6 @@
 {
-  "name": "claude-code-manager",
-  "displayName": "Claude Code Manager",
+  "name": "vscode-extention-command-board",
+  "displayName": "Command Board",
   "description": "Run pnpm/npm scripts across multiple worktrees and repositories from a sidebar.",
   "version": "0.0.1",
   "publisher": "hong-woongi-ab",
@@ -21,7 +21,7 @@
     "monorepo",
     "task runner",
     "pnpm",
-    "claude code"
+    "command board"
   ],
   "engines": {
     "vscode": "^1.85.0"
@@ -43,124 +43,124 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "claudeCodeManager",
-          "title": "Claude Code Manager",
+          "id": "commandBoard",
+          "title": "Command Board",
           "icon": "media/icon.svg"
         }
       ]
     },
     "views": {
-      "claudeCodeManager": [
+      "commandBoard": [
         {
-          "id": "claudeCodeManager.view",
+          "id": "commandBoard.view",
           "name": "Workspaces",
           "icon": "media/icon.svg",
-          "contextualTitle": "Claude Code Manager"
+          "contextualTitle": "Command Board"
         }
       ]
     },
     "viewsWelcome": [
       {
-        "view": "claudeCodeManager.view",
-        "contents": "ワークスペースが登録されていません。\n[ワークスペースを編集](command:claudeCodeManager.openSettings) から `claudeCodeManager.workspaces` に追加してください。"
+        "view": "commandBoard.view",
+        "contents": "ワークスペースが登録されていません。\n[ワークスペースを編集](command:commandBoard.openSettings) から `commandBoard.workspaces` に追加してください。"
       }
     ],
     "commands": [
       {
-        "command": "claudeCodeManager.runCommand",
+        "command": "commandBoard.runCommand",
         "title": "Run command",
-        "category": "Claude Code Manager",
+        "category": "Command Board",
         "icon": "$(play)"
       },
       {
-        "command": "claudeCodeManager.stopCommand",
+        "command": "commandBoard.stopCommand",
         "title": "Stop command",
-        "category": "Claude Code Manager",
+        "category": "Command Board",
         "icon": "$(debug-stop)"
       },
       {
-        "command": "claudeCodeManager.restartCommand",
+        "command": "commandBoard.restartCommand",
         "title": "Restart command",
-        "category": "Claude Code Manager",
+        "category": "Command Board",
         "icon": "$(debug-restart)"
       },
       {
-        "command": "claudeCodeManager.refresh",
+        "command": "commandBoard.refresh",
         "title": "Refresh",
-        "category": "Claude Code Manager",
+        "category": "Command Board",
         "icon": "$(refresh)"
       },
       {
-        "command": "claudeCodeManager.openSettings",
+        "command": "commandBoard.openSettings",
         "title": "Edit workspaces",
-        "category": "Claude Code Manager",
+        "category": "Command Board",
         "icon": "$(gear)"
       },
       {
-        "command": "claudeCodeManager.openWorkspaceFolder",
+        "command": "commandBoard.openWorkspaceFolder",
         "title": "Reveal in Finder",
-        "category": "Claude Code Manager",
+        "category": "Command Board",
         "icon": "$(folder-opened)"
       }
     ],
     "menus": {
       "view/title": [
         {
-          "command": "claudeCodeManager.openSettings",
-          "when": "view == claudeCodeManager.view",
+          "command": "commandBoard.openSettings",
+          "when": "view == commandBoard.view",
           "group": "navigation@1"
         },
         {
-          "command": "claudeCodeManager.refresh",
-          "when": "view == claudeCodeManager.view",
+          "command": "commandBoard.refresh",
+          "when": "view == commandBoard.view",
           "group": "navigation@2"
         }
       ],
       "view/item/context": [
         {
-          "command": "claudeCodeManager.runCommand",
-          "when": "view == claudeCodeManager.view && viewItem == command-idle",
+          "command": "commandBoard.runCommand",
+          "when": "view == commandBoard.view && viewItem == command-idle",
           "group": "inline@1"
         },
         {
-          "command": "claudeCodeManager.restartCommand",
-          "when": "view == claudeCodeManager.view && viewItem == command-running",
+          "command": "commandBoard.restartCommand",
+          "when": "view == commandBoard.view && viewItem == command-running",
           "group": "inline@1"
         },
         {
-          "command": "claudeCodeManager.stopCommand",
-          "when": "view == claudeCodeManager.view && viewItem == command-running",
+          "command": "commandBoard.stopCommand",
+          "when": "view == commandBoard.view && viewItem == command-running",
           "group": "inline@2"
         },
         {
-          "command": "claudeCodeManager.openWorkspaceFolder",
-          "when": "view == claudeCodeManager.view && viewItem == workspace",
+          "command": "commandBoard.openWorkspaceFolder",
+          "when": "view == commandBoard.view && viewItem == workspace",
           "group": "inline@1"
         }
       ],
       "commandPalette": [
         {
-          "command": "claudeCodeManager.runCommand",
+          "command": "commandBoard.runCommand",
           "when": "false"
         },
         {
-          "command": "claudeCodeManager.stopCommand",
+          "command": "commandBoard.stopCommand",
           "when": "false"
         },
         {
-          "command": "claudeCodeManager.restartCommand",
+          "command": "commandBoard.restartCommand",
           "when": "false"
         },
         {
-          "command": "claudeCodeManager.openWorkspaceFolder",
+          "command": "commandBoard.openWorkspaceFolder",
           "when": "false"
         }
       ]
     },
     "configuration": {
-      "title": "Claude Code Manager",
+      "title": "Command Board",
       "properties": {
-        "claudeCodeManager.workspaces": {
+        "commandBoard.workspaces": {
           "type": "array",
           "default": [],
           "markdownDescription": "ワークツリー / リポジトリと、その中で実行するコマンドの一覧。",
@@ -210,7 +210,7 @@
             }
           }
         },
-        "claudeCodeManager.reuseTerminal": {
+        "commandBoard.reuseTerminal": {
           "type": "boolean",
           "default": true,
           "description": "true の場合、同じコマンドを実行すると既存ターミナルにフォーカスする。false の場合は毎回新規ターミナルを開く。"
