@@ -42,7 +42,7 @@ code --install-extension cb.vsix
 Cursor CLI が PATH に通っていません。次のいずれかで対応してください。
 
 **(A) PATH に追加する（推奨）**
-Cursor で `Cmd + Shift + P` → `Shell Command: Install 'cursor' command in PATH` を実行 → ターミナル開き直し。
+Cursor で `Cmd + Shift + P` → `Shell Command: Install 'cursor' command` を実行 → ターミナル開き直し。
 
 **(B) フルパスで実行する（macOS）**
 ```bash
