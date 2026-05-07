@@ -23,9 +23,7 @@
 
 ### 方法1: GitHub Releases からインストール（推奨）
 
-[Releases ページ](https://github.com/ungi-ab/vscode-extention-command-board/releases) から最新の `vscode-extention-command-board-x.y.z.vsix` をダウンロード。
-
-ワンライナーで最新版を取得＆インストール:
+ターミナルでワンライナー実行するだけで、最新の `.vsix` を取得＆インストールできます。
 
 ```bash
 # Cursor の場合
@@ -39,7 +37,20 @@ curl -L -o cb.vsix \
 code --install-extension cb.vsix
 ```
 
-または `Cmd + Shift + P` → `Extensions: Install from VSIX...` から選択。
+#### `cursor: command not found` が出る場合
+
+Cursor CLI が PATH に通っていません。次のいずれかで対応してください。
+
+**(A) PATH に追加する（推奨）**
+Cursor で `Cmd + Shift + P` → `Shell Command: Install 'cursor' command in PATH` を実行 → ターミナル開き直し。
+
+**(B) フルパスで実行する（macOS）**
+```bash
+"/Applications/Cursor.app/Contents/Resources/app/bin/cursor" --install-extension cb.vsix
+```
+
+**(C) GUI からインストールする**
+Cursor で `Cmd + Shift + P` → `Extensions: Install from VSIX...` を選択し、`cb.vsix` を指定。
 
 ### 方法2: ソースからビルド
 
