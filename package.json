@@ -1,0 +1,193 @@
+{
+  "name": "claude-code-manager",
+  "displayName": "Claude Code Manager",
+  "description": "Run pnpm/npm scripts across multiple worktrees and repositories from a sidebar.",
+  "version": "0.0.1",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "claudeCodeManager",
+          "title": "Claude Code Manager",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "claudeCodeManager": [
+        {
+          "id": "claudeCodeManager.view",
+          "name": "Workspaces",
+          "icon": "media/icon.svg",
+          "contextualTitle": "Claude Code Manager"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "claudeCodeManager.view",
+        "contents": "ワークスペースが登録されていません。\n[ワークスペースを編集](command:claudeCodeManager.openSettings) から `claudeCodeManager.workspaces` に追加してください。"
+      }
+    ],
+    "commands": [
+      {
+        "command": "claudeCodeManager.runCommand",
+        "title": "Run command",
+        "category": "Claude Code Manager",
+        "icon": "$(play)"
+      },
+      {
+        "command": "claudeCodeManager.stopCommand",
+        "title": "Stop command",
+        "category": "Claude Code Manager",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "claudeCodeManager.refresh",
+        "title": "Refresh",
+        "category": "Claude Code Manager",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "claudeCodeManager.openSettings",
+        "title": "Edit workspaces",
+        "category": "Claude Code Manager",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "claudeCodeManager.openWorkspaceFolder",
+        "title": "Reveal in Finder",
+        "category": "Claude Code Manager",
+        "icon": "$(folder-opened)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "claudeCodeManager.openSettings",
+          "when": "view == claudeCodeManager.view",
+          "group": "navigation@1"
+        },
+        {
+          "command": "claudeCodeManager.refresh",
+          "when": "view == claudeCodeManager.view",
+          "group": "navigation@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "claudeCodeManager.runCommand",
+          "when": "view == claudeCodeManager.view && viewItem == command-idle",
+          "group": "inline@1"
+        },
+        {
+          "command": "claudeCodeManager.stopCommand",
+          "when": "view == claudeCodeManager.view && viewItem == command-running",
+          "group": "inline@1"
+        },
+        {
+          "command": "claudeCodeManager.openWorkspaceFolder",
+          "when": "view == claudeCodeManager.view && viewItem == workspace",
+          "group": "inline@1"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "claudeCodeManager.runCommand",
+          "when": "false"
+        },
+        {
+          "command": "claudeCodeManager.stopCommand",
+          "when": "false"
+        },
+        {
+          "command": "claudeCodeManager.openWorkspaceFolder",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Claude Code Manager",
+      "properties": {
+        "claudeCodeManager.workspaces": {
+          "type": "array",
+          "default": [],
+          "markdownDescription": "ワークツリー / リポジトリと、その中で実行するコマンドの一覧。",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "path",
+              "commands"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "サイドバーに表示する名前"
+              },
+              "path": {
+                "type": "string",
+                "description": "ワークツリーの絶対パス。${workspaceFolder} や ${env:HOME} も使用可"
+              },
+              "commands": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "label",
+                    "command"
+                  ],
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "description": "コマンドの表示名 (例: dev, build)"
+                    },
+                    "command": {
+                      "type": "string",
+                      "description": "実行するシェルコマンド (例: pnpm dev)"
+                    },
+                    "env": {
+                      "type": "object",
+                      "description": "追加で設定する環境変数",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "claudeCodeManager.reuseTerminal": {
+          "type": "boolean",
+          "default": true,
+          "description": "true の場合、同じコマンドを実行すると既存ターミナルにフォーカスする。false の場合は毎回新規ターミナルを開く。"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "typescript": "^5.4.0"
+  }
+}
