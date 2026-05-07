@@ -8,9 +8,11 @@
 - 左サイドバーにワークスペース専用ビューを追加
 - ワークツリーごとに登録したコマンドをツリー表示
 - ▶︎ アイコンで該当ディレクトリに統合ターミナルを開いて実行
+- 🔄 アイコンでターミナルを破棄して再起動
 - ⏹ アイコンで実行中ターミナルを停止
 - 同じコマンドを再実行すると既存ターミナルを再フォーカス（連打安全）
 - フォルダアイコンからワークツリーを Finder で開ける
+- Workspace Trust 対応（信頼済みワークスペースのみで動作）
 
 ## 必要環境
 
@@ -19,26 +21,32 @@
 
 ## インストール
 
-### Cursor / VSCode に VSIX を入れる方法
+### 方法1: GitHub Releases からインストール（推奨）
 
-1. リリースから `vscode-extention-command-board-x.y.z.vsix` を取得（または下記の手順で自分でビルド）
-2. インストール:
+[Releases ページ](https://github.com/ungi-ab/vscode-extention-command-board/releases) から最新の `vscode-extention-command-board-x.y.z.vsix` をダウンロード。
 
-   ```bash
-   # Cursor の場合
-   cursor --install-extension vscode-extention-command-board-x.y.z.vsix
+ワンライナーで最新版を取得＆インストール:
 
-   # VSCode の場合
-   code --install-extension vscode-extention-command-board-x.y.z.vsix
-   ```
+```bash
+# Cursor の場合
+curl -L -o cb.vsix \
+  https://github.com/ungi-ab/vscode-extention-command-board/releases/latest/download/vscode-extention-command-board-0.0.1.vsix
+cursor --install-extension cb.vsix
 
-   または `Cmd + Shift + P` → `Extensions: Install from VSIX...` から選択。
+# VSCode の場合
+curl -L -o cb.vsix \
+  https://github.com/ungi-ab/vscode-extention-command-board/releases/latest/download/vscode-extention-command-board-0.0.1.vsix
+code --install-extension cb.vsix
+```
 
-### ソースからビルド
+または `Cmd + Shift + P` → `Extensions: Install from VSIX...` から選択。
+
+### 方法2: ソースからビルド
 
 ```bash
 pnpm install
 pnpm run package    # vscode-extention-command-board-x.y.z.vsix が生成される
+cursor --install-extension vscode-extention-command-board-0.0.1.vsix
 ```
 
 ### 開発時（F5デバッグ）
@@ -108,14 +116,20 @@ pnpm run compile
 | --- | --- |
 | `commandBoard.runCommand` | コマンドを実行 |
 | `commandBoard.stopCommand` | 実行中ターミナルを破棄 |
+| `commandBoard.restartCommand` | 実行中ターミナルを破棄して再起動 |
 | `commandBoard.refresh` | TreeView を再描画 |
 | `commandBoard.openSettings` | `settings.json` を開く |
 | `commandBoard.openWorkspaceFolder` | OS のファイラで該当パスを開く |
 
 ## アンインストール / 更新
 
-- アンインストール: 拡張機能ビューから「Command Board」を選んで `Uninstall`
-- 更新: `package.json` の `version` を上げて再パッケージ → `--install-extension` で上書きインストール
+- **アンインストール**: 拡張機能ビューから「Command Board」を選んで `Uninstall`
+- **更新（利用者）**: 新しい [Release](https://github.com/ungi-ab/vscode-extention-command-board/releases) の `.vsix` を `--install-extension` で上書きインストール
+- **更新（開発者）**:
+  1. `package.json` の `version` を上げる
+  2. コミット & push
+  3. `pnpm run package` で VSIX 生成
+  4. `gh release create vX.Y.Z vscode-extention-command-board-X.Y.Z.vsix --title "vX.Y.Z" --notes "..."` でリリース公開
 
 ## ライセンス
 
