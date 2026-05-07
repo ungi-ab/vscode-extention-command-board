@@ -3,13 +3,38 @@
   "displayName": "Claude Code Manager",
   "description": "Run pnpm/npm scripts across multiple worktrees and repositories from a sidebar.",
   "version": "0.0.1",
-  "publisher": "local",
+  "publisher": "hong-woongi-ab",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ungi-ab/vscode-extention-command-board.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ungi-ab/vscode-extention-command-board/issues"
+  },
+  "homepage": "https://github.com/ungi-ab/vscode-extention-command-board#readme",
+  "keywords": [
+    "worktree",
+    "git",
+    "terminal",
+    "monorepo",
+    "task runner",
+    "pnpm",
+    "claude code"
+  ],
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": [
     "Other"
   ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "シェルコマンドを実行するため、信頼済みワークスペースのみで動作します。"
+    }
+  },
   "main": "./out/extension.js",
   "activationEvents": [
     "onStartupFinished"
